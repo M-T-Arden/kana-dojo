@@ -281,9 +281,12 @@ Attachments
 Triage Notes
 Missing Info
 Source
+Original User-Entered Fields
 ```
 
 The source section includes the Supabase report ID and Tally submission ID so maintainers can trace a GitHub issue back to the stored raw payload.
+
+The final `Original User-Entered Fields` section appends the raw text fields from Tally after the cleaned report, so maintainers can compare DeepSeek's formatted summary against the user's unaltered input.
 
 ## Rollout Checklist
 

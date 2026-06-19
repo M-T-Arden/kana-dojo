@@ -46,6 +46,7 @@ Your job:
 - Do not invent facts.
 - If information is missing, use null or an empty array.
 - Do not include private personal data unless it is directly needed to debug the issue.
+- Do not rewrite, summarize, or omit original raw form fields; the app will append those separately to the GitHub issue.
 - Return only valid JSON matching the requested schema.
 - Do not wrap the JSON in Markdown.
 

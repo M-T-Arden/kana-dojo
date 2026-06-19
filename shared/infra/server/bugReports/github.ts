@@ -10,6 +10,30 @@ function valueOrUnknown(value: string | null): string {
   return value?.trim() || 'Unknown';
 }
 
+function formatOriginalFields(fields: Record<string, unknown>): string {
+  const entries = Object.entries(fields).filter(([, value]) => {
+    if (value === null || value === undefined) {
+      return false;
+    }
+    if (typeof value === 'string') {
+      return value.trim().length > 0;
+    }
+    return true;
+  });
+
+  if (!entries.length) {
+    return 'None.';
+  }
+
+  return entries
+    .map(([label, value]) => {
+      const text =
+        typeof value === 'string' ? value : JSON.stringify(value, null, 2);
+      return `### ${label}\n\n${text}`;
+    })
+    .join('\n\n');
+}
+
 export function formatGitHubIssueBody({
   reportId,
   sourceSubmissionId,
@@ -95,6 +119,10 @@ ${missingInfo}
 - Report ID: ${reportId}
 - Tally submission ID: ${sourceSubmissionId || 'Unknown'}
 - Submitted at: ${normalized.submittedAt || 'Unknown'}
+
+## Original User-Entered Fields
+
+${formatOriginalFields(normalized.fields)}
 `;
 }
 
